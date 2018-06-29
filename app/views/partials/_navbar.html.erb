@@ -1,0 +1,93 @@
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <%= link_to image_tag(image_path('logo.png')),root_path, class: "navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+              <%= link_to "Home",root_path, class: "nav-link my-nav" %>
+            </li>
+            <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+              <%= link_to "About", about_path, class: "nav-link my-nav" %>
+            </li>
+            <li class="nav-item dropdown" style="padding: 0 5px;font-size: 20px;">
+              <a class="nav-link dropdown-toggle my-nav" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to "Science and Technology", tech_path, class: "dropdown-item" %>
+                  <%= link_to "Cultural", culture_path, class: "dropdown-item" %>
+                  <%= link_to "Entertainment", entertainment_path, class: "dropdown-item" %>
+                  <%= link_to "Politics", politics_path, class: "dropdown-item" %>
+                  <%= link_to "Sports", sports_path, class: "dropdown-item" %>
+                  <%= link_to "Programming", programming_path, class: "dropdown-item" %>
+                  <%= link_to "Products", product_path, class: "dropdown-item" %>
+                  <%= link_to "Other", other_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "All Posts", root_path, class: "dropdown-item" %>
+              </div>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+                <%= link_to "Make Post", new_post_path, class: "nav-link my-nav" %>
+              </li>
+              <li class="nav-item">
+                <% if !current_user.avatar.blank? %>
+                  <img class="img-responsive" style="border-radius: 25px;margin-left: 10px;" width="40px" height="40px" src=<%= image_path(current_user.avatar.url(:thumb)) %> alt=<%= current_user.avatar_file_name %>>
+                <% else %>
+                  <img class="img-responsive" style="border-radius: 25px;margin-left: 10px;" width="40px" height="40px" src=<%= image_path('default-missing.jpg') %> alt="missing">
+                <% end %>
+              </li>
+              <li class="nav-item dropdown" style="padding: 0 5px;font-size: 20px;">
+                <a class="nav-link dropdown-toggle my-nav" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                  <%= link_to "My Posts", myposts_path, class: "dropdown-item" %>
+                  <%= link_to "Make Post", new_post_path, class: "dropdown-item" %>
+                  <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to "Log Out",destroy_user_session_path, class: "dropdown-item",method: :get %> 
+                </div>
+              </li>
+            <% else %>
+              <li class="nav-item" style="padding: 0 5px;font-size: 20px;"> <%= link_to "Make Post", new_user_registration_path, class: "nav-link my-nav" %></li>
+              <li class="nav-item dropdown" style="padding: 0 5px;font-size: 20px;">
+                <a class="nav-link dropdown-toggle my-nav" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Login/Sign Up
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                  <div class="col-sm-12">
+                    <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                      <div class="form-group">
+                        <%= f.label :email %>
+                        <%= f.text_field :email, placeholder: "email@example.com", class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :password %>
+                        <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+                      </div>
+                      <!--<div class="form-check">
+                        <%= f.check_box :remember_me, class: "form-check-input" %>
+                        <%= f.label :remember_me %>
+                      </div>-->
+                      <%= f.submit 'Sign in',class: "btn btn-primary" %>
+                      <div class="dropdown-divider"></div>
+                      <%= link_to "Forgot your password?", new_password_path(:user), class: "dropdown-item" %>
+                      <%= link_to "Sign Up", new_registration_path(:user), class: "dropdown-item" %>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+
+            <% end %>
+            <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+              <%= link_to "Feedback",feedbacks_path, class: "nav-link my-nav" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+

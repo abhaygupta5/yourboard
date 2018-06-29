@@ -1,0 +1,56 @@
+<div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    Make Post
+                    <small>Unleash your Thoughts</small>
+                </h1>
+
+	<%= form_for :post, url: posts_path do |f| %>
+		<% if @post.errors.any? %>
+			<div id="errors">
+				<h2><%= pluralize(@post.errors.count, "error") %> stopped this post from saving</h2> 
+				<ul>
+					<% @post.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+
+					<% end %>
+
+				</ul>
+
+			</div>
+
+		<% end %>
+		<p>
+			<%= f.label :category %><br>
+			<%= f.select :category, [ ['Science and Technology','tech'], ['Programming','prog'], ['Culture','culture'],['Sports'],['Entertainment'],['Product'],['Politics'], 'Other' ], :prompt => 'Select One Category of your post', :class => 'genForm_dropBox' %>
+		</p>
+		<p>
+			<%= f.label :title %><br>
+			<%= f.text_field :title, autofocus: true,class: "form-control" %>
+		</p>
+
+		<p>
+			<%= f.label :body %><br>
+			<%= f.cktext_area :body, rows: 40 %>
+		</p>
+
+		<p>
+			<%= f.label :image %><br>
+			<%= f.file_field :image, required: false, class: "form-control" %>
+		</p>
+
+		
+
+		<p>
+			<%= f.submit class: "btn btn-primary" %>
+		</p>
+	<% end %>
+</div>
+
+<%= render 'partials/search' %>
+<%= render 'partials/categories' %>
+<%= render 'partials/widget' %>
+</div>

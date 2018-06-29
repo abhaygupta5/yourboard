@@ -1,0 +1,29 @@
+<div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    Resend Unlock Instruction
+                </h1>
+
+<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.full_error :unlock_token %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Resend unlock instructions" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>
+
+<%= render 'partials/search' %>
+<%= render 'partials/categories' %>
+<%= render 'partials/widget' %>
+</div>

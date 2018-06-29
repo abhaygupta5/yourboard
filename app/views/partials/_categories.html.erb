@@ -1,0 +1,58 @@
+<!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Yourboard Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <%= link_to tech_path do %>
+                                        Science and Technology (<span><%= Post.where(category: "tech").count %></span>)
+                                    <% end %>
+                                    
+                                </li>
+                                <li>
+                                    <%= link_to culture_path do %>
+                                        Cultural (<span><%= Post.where(category: "culture").count %></span>)
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <%= link_to entertainment_path do %>
+                                        Entertainment (<span><%= Post.where(category: "Entertainment").count %></span>)
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <%= link_to politics_path do %>
+                                        Politics (<span><%= Post.where(category: "Politics").count %></span>)
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <%= link_to sports_path do %>
+                                        Sports (<span><%= Post.where(category: "Sports").count %></span>)
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <%= link_to programming_path do %>
+                                        Programming (<span><%= Post.where(category: "prog").count %></span>)
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <%= link_to product_path do %>
+                                        Products (<span><%= Post.where(category: "Product").count %></span>)
+                                    <% end %>
+                                </li>
+                                <li>
+                                    <%= link_to other_path do %>
+                                        Others (<span><%= Post.where(category: "Other").count %></span>)
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>

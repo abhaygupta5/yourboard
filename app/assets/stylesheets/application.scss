@@ -1,0 +1,54 @@
+
+
+
+@import "bootstrap";
+@import 'normalize';
+
+@import "blog";
+@import "bootstrap.min.scss";
+@import "font-awesome.min.css.scss";
+
+#profile{
+	width: 150px;
+	height: 150px;
+	z-index: 7;
+	position: absolute;
+	bottom:0;
+	left:0;
+}
+
+#changetimeline{
+	width: 150px;
+	height: 40px;
+	z-index: 7;
+	position: absolute;
+	bottom:0;
+	right:18px;
+}
+
+.pagination{
+	padding-left:0;margin:20px 0;text-align:center;list-style:none;
+	.previous_page{
+		display:inline-block;padding:5px 14px;background-color:#fff;border:1px solid #ddd;border-radius:15px;
+	}
+	.next_page{
+		display:inline-block;padding:5px 14px;background-color:#fff;border:1px solid #ddd;border-radius:15px;
+	}
+}
+
+.navbar-brand{
+	padding-top:5px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: blue;
+	text-decoration: none;
+}
+
+img{
+	max-width: 100%;
+}

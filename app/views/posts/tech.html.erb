@@ -1,0 +1,25 @@
+<div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+                
+                <h1 class="page-header">
+                    Science and Technology
+                    <small>These are some tech posts</small>
+                </h1>
+                <img class="img-responsive" src=<%= image_path('tech.jpg') %> alt="tech">
+                <hr>
+
+<%= render 'display' %>
+<!-- Pager -->
+<ul class="pager">
+  <%= will_paginate @posts,:page_links => false,:previous_label=>"&larr; Older", :next_label=>"Newer &rarr;" %>
+  
+</ul>
+
+</div>
+
+<%= render 'partials/search' %>
+<%= render 'partials/categories' %>
+<%= render 'partials/widget' %>
+</div>

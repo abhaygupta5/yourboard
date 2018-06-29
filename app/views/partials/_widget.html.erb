@@ -1,0 +1,27 @@
+<!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Recent Comments</h4>
+                    <div id="RecentComments" class="dsq-widget">
+						 
+						 <script type="text/javascript" src="https://yourboard.disqus.com/recent_comments_widget.js?num_items=5&hide_mods=0&hide_avatars=0&avatar_size=32&excerpt_length=100"></script>
+					</div>
+                </div>
+                <% if user_signed_in? %>
+                <div class="well">
+                    <div class="card my-4">
+                    
+					<%= form_for :comment, url: comments_path do |f| %>
+						
+							<h5 class="card-header"><%= f.label :body,"Give us Feedback:" %></h5>
+							<div class="card-body">
+								<div class="form-group">
+									<%= f.text_area :body, class: "form-control" %>
+							</div>
+						
+							<%= f.submit "Submit", class: "btn btn-primary" %>
+							</div>
+					<% end %>
+					</div>
+                </div>
+                <% end %>
+                </div>
