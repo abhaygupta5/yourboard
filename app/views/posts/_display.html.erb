@@ -1,5 +1,6 @@
+
 <% @posts.each do |post| %>
-  <div style="border: 5px outset;padding:10px;margin:10px 0; background-color: #ffcc99">
+  <div style="border: 5px outset;padding:10px;margin:10px 0; background-color: #ffcc99" class="animated rubberBand">
     
     
       <h2>
@@ -9,34 +10,34 @@
           by <%= post.user.name %>
       </p>
       <p><i class="fa fa-clock-o"></i> Posted on <%= post.created_at.strftime("%B, %d %Y") %></p>
-      <hr>
+      
     <%= link_to post do %>
-      <table ><tr style="width:100%;">
-      <td style="padding-right:10px;"><div style="height:100%;width:100%;">
+      <hr>
         <% if !post.image.blank? %>
-          <img class="img-responsive" src=<%= image_path(post.image.url) %> alt=<%= post.image_file_name %>>
+          <img class="img-responsive" style="width:100%;padding: 0 10%;" src=<%= image_path(post.image.url) %> alt=<%= post.image_file_name %>>
         <% else %>
-          <img class="img-responsive" width="200" height="200" src=<%= image_path('no-image.jpg') %> alt="no image" >
+          <img class="img-responsive" style="padding: 0 10%;" src=<%= image_path('no-image.jpg') %> alt="no image" >
         <% end %>
-      </div>
-    </td>
-    <td style="width:60%;margin-left: 10px;padding-left:10px;font-size: 20px;border-left: 1px inset;">
-      <div > 
-        <p><%= sanitize(post.body.slice(0..150), :tags=>[]) %></p>
-      </div>
-    </td>
-    </tr>
-    </table> 
+      <hr>
+        <p style="padding: 0 10%;"><%= truncate(post.body.gsub(/<[^>]+>/,''), :length=>150) %></p>
+      
   <% end %>
   <hr> 
     <div>
       <%= link_to post, :class => 'btn btn-primary' do %>
         Read More<i class="fa fa-chevron-right"></i>
       <% end %>
-      <p style="float:right;font-size: 20px;font-weight: bold;"><i class="fa fa-eye"></i> <%= post.count %> Hits</p>
+      <p style="float:right;font-size: 15px;font-weight: bold;margin-left: 4px;">
+        <i class="fa fa-heart"></i> <%= post.likes %>
+      </p>
+      <p style="float:right;font-size: 15px;font-weight: bold;margin-left: 4px;">
+        <i class="fa fa-comment"></i> <%= Comment.where(post_id: post.id ).count %>
+      </p>
+      <p style="float:right;font-size: 15px;font-weight: bold;"><i class="fa fa-eye"></i> <%= post.count %> Hits</p>
     </div>
   
   </div>
       
 	
 <% end %>
+

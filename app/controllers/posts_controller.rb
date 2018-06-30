@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :find_doc, only: [:update, :destroy, :edit, :show]
+	before_action :find_doc, only: [:update, :destroy, :edit, :show, :like]
 	
 	def index
 		#@posts=Post.where(user_id: current_user).order("created_at DESC")
@@ -8,6 +8,8 @@ class PostsController < ApplicationController
 				else
 					Post.all.order("updated_at DESC").paginate(:page=> params[:page], :per_page=> 3)
 				end
+		
+		
 	end
 
 	def new
@@ -55,6 +57,12 @@ class PostsController < ApplicationController
 		redirect_to root_path
 	end
 
+	def like
+		@post.increment!(:likes)
+		flash[:notice] = "You just liked the post"
+		redirect_to post_path(@post)
+	end
+
 	def tech
 		@posts= Post.where(category: "tech").all.order("updated_at DESC").paginate(:page=> params[:page], :per_page=> 5)
 	end
@@ -99,11 +107,14 @@ class PostsController < ApplicationController
 	private
 		def find_doc
 			@post = Post.find(params[:id])
+			
 		end
 
 		def post_params
 			params.require(:post).permit(:title,:body,:image,:category,:term,:spam,:slug)
 		end
+
+		
 
 		
 

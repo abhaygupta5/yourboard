@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
     <title>Your Board</title>
     <%= favicon_link_tag 'favicon.ico' %>
@@ -13,53 +14,35 @@
       });
     </script>
 
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>    
+<script>
+  $(document).ready(function() {
+  //Preloader
+  $(window).on("load", function() {
+  preloaderFadeOutTime = 1000;
+  function hidePreloader() {
+  var preloader = $('.spinner-wrapper');
+  preloader.fadeOut(preloaderFadeOutTime);
+  }
+  hidePreloader();
+
+  });
+  });
+</script>
   </head>
 
   <body style="background-color: #e6e6ff">
-    <!--<div id="fb-root" ></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));</script>
--->
-
-<!--<div id="RecentComments" class="dsq-widget">
- <h2>Recent Comments</h2>
- <script type="text/javascript" src="https://yourboard.disqus.com/recent_comments_widget.js?num_items=5&hide_mods=0&hide_avatars=0&avatar_size=32&excerpt_length=100"></script>
-</div>-->
+ 
 
     <%= render 'partials/navbar' %>
-
-    <!-- Page Header -->
-    
+  
 
 
-    
 
     <!-- Main Content -->
     <% unless notice.nil? %>
@@ -68,7 +51,9 @@
       </div>
     <% end %>
     
-        
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
   
   <div class="container">
         
@@ -77,21 +62,11 @@
   <script>
     CKEDITOR.addCss('p{}');
   </script>      
-
+ 
     
 
     
-      <!--<div id="header">
-      <% if current_page?(root_path) %>
-        <p>Post Feed </p>
-      <% elsif current_page?(about_path) %>
-        <p>About</p>
-      <% else %>
-        <p>You are reading a post</p>
-      <% end %>
-        
-      </div>-->
-
+      
       <!-- for displaying errors and messages
       <% flash.each do |name,msg| %>
         <%= content_tag(:div,msg,class: "alert") %>
@@ -101,6 +76,9 @@
    </div> 
 
     <%= render 'partials/footer' %>
+
+
+
 
   
   <!-- Bootstrap core JavaScript -->

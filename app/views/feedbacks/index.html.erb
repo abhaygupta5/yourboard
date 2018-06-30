@@ -1,0 +1,40 @@
+<div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+            	<h1 class="page-header">
+                    Feedback
+                    <small>You are viewing feedbacks</small>
+                </h1>
+
+<% @feedbacks.each do |feedback| %>
+<div style="border: 5px outset;padding:10px;margin:10px 0;">
+	<h2 class="lead"><%= simple_format(feedback.body) %></h2>
+    <hr>
+    <p><i class="fa fa-clock-o"></i> Posted on <%= feedback.created_at.strftime("%B, %d %Y") %> By <%= feedback.user.name %></p>
+    <hr>
+                <% if user_signed_in? && current_user.id==1 %>
+					<p align="left"><%= link_to image_tag("icon.png"), feedback_path(feedback), method: :delete, data: { confirm: "Are you sure?"} %></p>
+                    <hr>
+				<% end %>
+</div>
+    
+	
+<% end %>
+<!-- Pager -->
+<ul class="pager">
+  <%= will_paginate @posts,:page_links => false,:previous_label=>"&larr; Older", :next_label=>"Newer &rarr;" %>
+  
+</ul>
+
+</div>
+
+<%= render 'partials/search' %>
+<%= render 'partials/categories' %>
+<%= render 'partials/widget' %>
+</div>
+            	
+	
+	
+	
+

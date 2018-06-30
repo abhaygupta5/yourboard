@@ -3,8 +3,7 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
             	<h1 class="page-header">
-                    <%= @post.title %>
-                    <small>You are viewing a post</small>
+                    You are viewing a post
                 </h1>
             		<div>
 					<% if user_signed_in? && @post.user_id== current_user.id %>
@@ -38,6 +37,10 @@
                 <h4><%= raw(@post.body) %></h4>
                 
                 <hr>
+                <%= link_to like_post_path(@post.id) do %>
+                    <span style="font-size:20px;font-weight: bold;">Like the Post</span> <i class="fa fa-heart" style="font-size: 20px;font-weight: bold;"></i>
+                <% end %>
+                <hr>
 	
 	<!-- AddToAny BEGIN -->
 <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -59,8 +62,26 @@
 <!-- AddToAny END -->
 
 	<hr style="margin-bottom: 5%;">
+
+    <h3>Comments</h3>
+<% if user_signed_in? %>
+    <div class="card my-4">
+        <%= form_for [@post, Comment.new] do |f| %>
+            <h5 class="card-header"><%= f.label :body,"Leave a Comment:" %></h5>
+            <div class="card-body">
+                <div class="form-group">
+                    <%= f.text_area :body, placeholder: "Add a comment",class: "form-control" %>
+                </div>
+            </div>
+            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+<% end %>
+        <ul style="list-style-type: none">
+          <%= render(partial: 'comments/comment', collection: @post.comments) %>
+        </ul>
+    
 	
-	<%= render('disqus') %>
 	</div>
 
 <%= render 'partials/search' %>

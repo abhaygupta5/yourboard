@@ -15,6 +15,9 @@
 //
 //= require bootstrap-sprockets
 //= require bootstrap
+//= require rails_emoji_picker
 //= require jquery
+
+//= require jquery-ui
 //= require ckeditor/init
 

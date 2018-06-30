@@ -1,0 +1,47 @@
+<li>
+<div class="card my-4">
+	<div class="card-header">
+<table>
+	<tr>
+		<td style="width:30px;">
+			<% if !comment.user.avatar.blank? %>
+				<img class="img-responsive" width="30" height="30" src=<%= image_path(comment.user.avatar.url(:thumb)) %> alt=<%= comment.user.avatar_file_name %>>
+			<% else %>
+				<img class="img-responsive" width="30" height="30" src=<%= image_path('default-missing.jpg') %> alt="default missing" >
+			<% end %>
+		</td>
+		<td >
+
+			<p style="font-size:20px;margin-right: 10px;"><%= comment.body %></p>
+		</td>
+		<td align="right" style="width:30px;">
+			<% if user_signed_in? && (comment.user.id== current_user.id || comment.post.user.id==current_user.id) %>
+				<p><%= link_to image_tag(image_path('icon.png')),comment_path(comment), method: :delete, data: { confirm: "Are you sure you want to delete? "} %></p>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 100%;" colspan="3"><small>Submitted <%= time_ago_in_words(comment.created_at) %> ago</small></td>
+	</tr>
+</table>
+</div> 
+  
+  
+ <% if user_signed_in? %>
+  
+  	<%= form_for [comment, Comment.new] do |f| %>
+  		<div class="card-body">
+  			<div class="form-group" >
+  				<%= f.text_area :body, placeholder: "Add a Reply", class: "form-control" %>
+  			</div>
+  		</div>
+      <%= f.submit "Reply", class: "btn"  %>
+    <% end %>
+  
+<% end %>
+</div>
+  <ul style="list-style-type: none">
+      <%= render partial: 'comments/comment', collection: comment.comments %>
+  </ul>
+
+</li>

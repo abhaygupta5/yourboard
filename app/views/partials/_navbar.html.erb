@@ -1,7 +1,7 @@
 <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <%= link_to image_tag(image_path('logo.png')),root_path, class: "navbar-brand" %>
+        <%= link_to image_tag(image_path('logo-modi.png')),root_path, class: "navbar-brand" %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,7 +10,7 @@
             <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
               <%= link_to "Home",root_path, class: "nav-link my-nav" %>
             </li>
-            <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+            <li class="nav-item" style="padding: 0 5px;font-size: 20px;" >
               <%= link_to "About", about_path, class: "nav-link my-nav" %>
             </li>
             <li class="nav-item dropdown" style="padding: 0 5px;font-size: 20px;">
@@ -75,8 +75,7 @@
                       </div>-->
                       <%= f.submit 'Sign in',class: "btn btn-primary" %>
                       <div class="dropdown-divider"></div>
-                      <%= link_to "Forgot your password?", new_password_path(:user), class: "dropdown-item" %>
-                      <%= link_to "Sign Up", new_registration_path(:user), class: "dropdown-item" %>
+                      <%= render 'devise/shared/custom_login' %>
                     <% end %>
                   </div>
                 </div>
