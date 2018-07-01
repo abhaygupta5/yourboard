@@ -43,6 +43,7 @@
 
 .navbar-brand{
 	padding-top:5px;
+  margin-left:0;
 }
 
 a{
@@ -124,6 +125,9 @@ position: absolute;
 	#popup{
 		width: 80%;
 	}
+  iframe{
+    width: 95%;
+  }
 }
 @media only screen and (max-width: 767px) and (orientation: landscape) {
 	#popup{
@@ -132,6 +136,14 @@ position: absolute;
 		height: 70%;
 		overflow: scroll;
 	}
+  iframe{
+    width: 95%;
+  }
+  .navbar-collapse{
+    height: 240px;
+    overflow:scroll;
+  }
+  
 }
    .modal {
         position: fixed;

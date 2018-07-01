@@ -2,10 +2,10 @@
                 <div class="well">
                     <h4>Recent Comments</h4>
                     <div id="RecentComments">
-						 
+					<hr>	 
 						<% Comment.order('created_at DESC').limit(5).each do |comment| %>
 							 						    
-							    
+							<%= link_to post_path(comment.post) do %>    
 							      <table ><tr>
 							      <td style="width:40px;">
 							        <% if !comment.user.avatar.blank? %>
@@ -17,11 +17,16 @@
 							    </td>
 							    <td>
 							      <div > 
-							        <p style="margin-left: 10px;font-size: 14px;"><%= comment.body.slice(0..50) %><strong> By <%= comment.user.name %></strong></p>
+							        <p style="margin-left: 10px;font-size: 14px;"><%= comment.body.slice(0..50) %><strong> By <%= comment.user.name %>
+							        	<% if (comment.user.id==1 || comment.user.id==2) %>
+											<sup style="background-color:black;padding:1px 2px;border-radius:2px;color:white;font-weight:bold;">Mod</sup>
+										<% end %>
+							        </strong></p>
 							      </div>
 							    </td>
 							    </tr>
 							    </table> 
+							<% end %>
 							    <hr> 
 						<% end %>
 							  
@@ -45,7 +50,7 @@
 							    </td>
 							    <td style="width:60%;margin-left: 10px;padding-left:10px;font-size: 20px;border-left: 1px inset;">
 							      <div > 
-							        <p><%= post.title %> By <%= post.user.name %></p>
+							        <p><%= post.title %><small><strong> By <%= post.user.name %></strong></small></p>
 							      </div>
 							    </td>
 							    </tr>
@@ -62,21 +67,39 @@
 					</div>
                 </div>
                 <% if user_signed_in? %>
-                <div class="well">
-                    <div class="card my-4">
-                    
-					<%= form_for :feedback, url: feedbacks_path do |f| %>
-						
-							<h5 class="card-header"><%= f.label :body,"Give us Feedback:" %></h5>
-							<div class="card-body">
-								<div class="form-group">
-									<%= f.text_area :body, class: "form-control" %>
-							</div>
-						
-							<%= f.submit "Submit", class: "btn btn-primary" %>
-							</div>
-					<% end %>
-					</div>
-                </div>
+	                <div class="well">
+	                    <div class="card my-4">
+	                    
+						<%= form_for :feedback, url: feedbacks_path do |f| %>
+							
+								<h5 class="card-header"><%= f.label :body,"Give us Feedback:" %></h5>
+								<div class="card-body">
+									<div class="form-group">
+										<%= f.text_area :body, class: "form-control" %>
+								</div>
+							
+								<%= f.submit "Submit", class: "btn btn-primary" %>
+								</div>
+						<% end %>
+						</div>
+	                </div>
+	            <% else %>
+	            	<div class="well">
+	                    <div class="card my-4">
+	                    
+						<%= form_for :feedback, url: feedbacks_path do |f| %>
+							
+								<h5 class="card-header"><%= f.label :body,"Give us Feedback:" %></h5>
+								<div class="card-body">
+									<div class="form-group">
+										<%= f.text_area :body,placeholder: "Please Login or Sign Up to give feedback", class: "form-control" %>
+								</div>
+							
+								<%= link_to "Login",new_user_session_path, class: "btn btn-primary" %>
+								<%= link_to "Sign Up",new_user_registration_path, class: "btn btn-primary" %>
+								</div>
+						<% end %>
+						</div>
+	                </div>
                 <% end %>
                 </div>

@@ -19,7 +19,7 @@
           <img class="img-responsive" style="padding: 0 10%;" src=<%= image_path('no-image.jpg') %> alt="no image" >
         <% end %>
       <hr>
-        <p style="padding: 0 10%;"><%= truncate(post.body.gsub(/<[^>]+>/,''), :length=>150) %></p>
+        <p style="padding: 0 10%;font-size: 15px;font-weight:bold;"><%= sanitize(post.body.gsub(/<[^>]+>/,''), :tags=>[]).truncate(350, :separator => " ").html_safe %></p>
       
   <% end %>
   <hr> 

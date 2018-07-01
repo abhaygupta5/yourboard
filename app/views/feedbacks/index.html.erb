@@ -13,7 +13,7 @@
     <hr>
     <p><i class="fa fa-clock-o"></i> Posted on <%= feedback.created_at.strftime("%B, %d %Y") %> By <%= feedback.user.name %></p>
     <hr>
-                <% if user_signed_in? && current_user.id==1 %>
+                <% if user_signed_in? && (current_user.id==1 || current_user.id==2) %>
 					<p align="left"><%= link_to image_tag("icon.png"), feedback_path(feedback), method: :delete, data: { confirm: "Are you sure?"} %></p>
                     <hr>
 				<% end %>

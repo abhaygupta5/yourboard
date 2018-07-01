@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   
   get '/about', to: 'pages#about'
+  get '/userlist', to: 'pages#userlist' 
 
   get '/tech', to: 'posts#tech'
   get '/programming', to: 'posts#programming'

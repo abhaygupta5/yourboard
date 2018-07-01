@@ -1,0 +1,53 @@
+<div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    User List
+                    
+                </h1>
+
+						<% @userlist.each do |post| %>
+							 						    
+							    
+							      <table style="background-color:#8ff442"><tr style="width:100%;">
+							      <td style="padding-right:10px;">
+							      	<div style="height:100%;width:100%;">
+							        <% if !post.avatar.blank? %>
+							          <img class="img-responsive" src=<%= image_path(post.avatar.url(:thumb)) %> alt=<%= post.avatar_file_name %>>
+							        <% else %>
+							          <img class="img-responsive" width="150" height="150" src=<%= image_path('default-missing.jpg') %> alt="no image" >
+							        <% end %>
+							      </div>
+							    </td>
+							    <td style="width:80%;margin-left: 10px;padding-left:10px;font-size: 20px;border-left: 1px inset;">
+							      <div > 
+							        <p><%= post.email %><small> have name <strong><%= post.name %></strong></small></p>
+							        <p><%= post.name %> has user id <%= post.id %></p>
+							        <p><%= post.name %> has posted <%= @post.where(user_id: post.id).count %> posts</p>
+							        <p><%= post.name %> has posted <%= @comment.where(user_id: post.id).count %> comments</p>
+							      </div>
+							    </td>
+							    </tr>
+							    </table> 
+							  
+							  <hr> 
+							    
+							  
+							  
+							      
+								
+						<% end %>
+
+<ul class="pager">
+  <%= will_paginate @userlist,:page_links => false,:previous_label=>"&larr; Older", :next_label=>"Newer &rarr;" %>
+  
+</ul>
+
+</div>
+
+<%= render 'partials/search' %>
+<%= render 'partials/categories' %>
+<%= render 'partials/widget' %>
+</div>

@@ -8,6 +8,11 @@ class CommentsController < ApplicationController
     def create
       @comment = @commentable.comments.new comment_params
       @comment.user_id = current_user.id
+      if params[:post_id]
+        @comment.post_id = params[:post_id]
+      else
+        @comment.post_id = Comment.where(commentable_id: @commentable.commentable_id).first.post_id
+      end
       if @comment.save
       	flash[:notice]= 'Your comment was successfully posted!'
         redirect_back fallback_location: root_path

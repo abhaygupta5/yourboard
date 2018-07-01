@@ -12,16 +12,31 @@
 		</td>
 		<td >
 
-			<p style="font-size:20px;margin-right: 10px;"><%= comment.body %></p>
+			<p style="font-size:20px;margin:0 15px;"><%= comment.body %></p>
 		</td>
 		<td align="right" style="width:30px;">
-			<% if user_signed_in? && (comment.user.id== current_user.id || comment.post.user.id==current_user.id) %>
+			<% if user_signed_in? && (current_user.id==1 || current_user.id==2 || comment.user.id== current_user.id || comment.post.user.id==current_user.id) %>
 				<p><%= link_to image_tag(image_path('icon.png')),comment_path(comment), method: :delete, data: { confirm: "Are you sure you want to delete? "} %></p>
 			<% end %>
 		</td>
 	</tr>
 	<tr>
-		<td style="width: 100%;" colspan="3"><small>Submitted <%= time_ago_in_words(comment.created_at) %> ago</small></td>
+		<% if user_signed_in? %>
+			<td style="width: 100%;" colspan="3"><small>Submitted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.name %>
+				<% if (comment.user.id==1 || comment.user.id==2) %>
+					<sup>Mod</sup>
+				<% end %>
+				
+			</small></td>
+		<% else %>
+			<td colspan="2"><small>Submitted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.name %>
+				<% if (comment.user.id==1 || comment.user.id==2) %>
+					<sup>Mod</sup>
+				<% end %>
+
+			</small></td>
+			<td><%= link_to "Reply",new_user_registration_path,class: "btn" %></td>
+		<% end %>
 	</tr>
 </table>
 </div> 

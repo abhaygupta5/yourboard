@@ -38,25 +38,27 @@
                 
                 <hr>
                 <%= link_to like_post_path(@post.id) do %>
+                    <span class="btn btn-primary">
                     <span style="font-size:20px;font-weight: bold;">Like the Post</span> <i class="fa fa-heart" style="font-size: 20px;font-weight: bold;"></i>
+                    </span>
                 <% end %>
                 <hr>
 	
 	<!-- AddToAny BEGIN -->
 <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_google_plus"></a>
-<a class="a2a_button_linkedin"></a>
-<a class="a2a_button_email"></a>
-<a class="a2a_button_whatsapp"></a>
-<a class="a2a_button_reddit"></a>
-<a class="a2a_button_blogger"></a>
-<a class="a2a_button_skype"></a>
-<a class="a2a_button_sms"></a>
-<a class="a2a_button_copy_link"></a>
-<a class="a2a_button_hacker_news"></a>
+<a class="a2a_button_facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a>
+<a class="a2a_button_twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a>
+<a class="a2a_button_google_plus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a>
+<a class="a2a_button_linkedin" data-toggle="tooltip" data-placement="top" title="Linked In"></a>
+<a class="a2a_button_email" data-toggle="tooltip" data-placement="top" title="Email"></a>
+<a class="a2a_button_whatsapp" data-toggle="tooltip" data-placement="top" title="Whatsapp"></a>
+<a class="a2a_button_reddit" data-toggle="tooltip" data-placement="top" title="Reddit"></a>
+<a class="a2a_button_blogger" data-toggle="tooltip" data-placement="top" title="Blogger"></a>
+<a class="a2a_button_skype" data-toggle="tooltip" data-placement="top" title="Skype"></a>
+<a class="a2a_button_sms" data-toggle="tooltip" data-placement="top" title="SMS"></a>
+<a class="a2a_button_copy_link" data-toggle="tooltip" data-placement="top" title="Copy Link"></a>
+<a class="a2a_button_hacker_news" data-toggle="tooltip" data-placement="top" title="Hacker News"></a>
 </div>
 <script async src="https://static.addtoany.com/menu/page.js"></script>
 <!-- AddToAny END -->
@@ -64,6 +66,7 @@
 	<hr style="margin-bottom: 5%;">
 
     <h3>Comments</h3>
+
 <% if user_signed_in? %>
     <div class="card my-4">
         <%= form_for [@post, Comment.new] do |f| %>
@@ -77,10 +80,15 @@
         <% end %>
     </div>
 <% end %>
-        <ul style="list-style-type: none">
-          <%= render(partial: 'comments/comment', collection: @post.comments) %>
-        </ul>
-    
+<% if Comment.where(post_id: @post.id).count!=0 %>
+    <div style="height: 600px;overflow: scroll;">
+            <ul style="list-style-type: none">
+              <%= render(partial: 'comments/comment', collection: @post.comments) %>
+            </ul>
+    </div>
+<% else %>
+    <div><h4>No Comments Yet</h4></div>
+<% end %>    
 	
 	</div>
 
