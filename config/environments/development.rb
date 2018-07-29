@@ -60,7 +60,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'http://yourboard.gensparc.com', port: 3000 }
+  #config.action_mailer.default_url_options = { host: 'http://yourboard.gensparc.com', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'http://yourboard.serveo.net' }
   config.action_mailer.smtp_settings = {
     user_name: "yourboard1999@gmail.com",
     password: "yourboard",

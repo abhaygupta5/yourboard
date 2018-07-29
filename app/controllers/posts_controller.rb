@@ -59,8 +59,9 @@ class PostsController < ApplicationController
 
 	def like
 		@post.increment!(:likes)
+		@post.decrement!(:count)
 		flash[:notice] = "You just liked the post"
-		redirect_to post_path(@post)
+		redirect_back fallback_location: root_path
 	end
 
 	def tech

@@ -34,7 +34,7 @@
                 	<img class="img-responsive" src=<%= @post.image.url %> alt=<%= @post.image_file_name %>>
                 	<hr>
                 <% end %>
-                <h4><%= raw(@post.body) %></h4>
+                <h4 id="postbody"><%= @post.body.html_safe %></h4>
                 
                 <hr>
                 <%= link_to like_post_path(@post.id) do %>
@@ -81,7 +81,7 @@
     </div>
 <% end %>
 <% if Comment.where(post_id: @post.id).count!=0 %>
-    <div style="height: 600px;overflow: scroll;">
+    <div style="height: 600px;overflow: auto;">
             <ul style="list-style-type: none">
               <%= render(partial: 'comments/comment', collection: @post.comments) %>
             </ul>

@@ -36,6 +36,7 @@
                 <div class="well">
                     <h4>Popular Posts</h4>
                     <div id="PopularPosts">
+                    <hr>
 						 <% Post.order('count DESC').limit(5).each do |post| %>
 							 						    
 							    <%= link_to post do %>
