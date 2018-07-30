@@ -20,7 +20,7 @@ class Notifications
                   
           items = $.map data, (notification) ->
                   console.log(data)
-                  "<div style='word-break: break-all;'><a class='dropdown-item' href='/notifications/#{notification.id}/mark_as_read' data-behavior = 'notification-link' id='#{notification.id}'><p><strong>#{notification.actor}</strong> posted a new comment on post <br><strong>#{notification.notifiable.title}</strong></p></a></div><hr>"
+                  "<div style='word-break: break-all;'><a class='dropdown-item' href='/notifications/#{notification.id}/mark_as_read' data-behavior = 'notification-link' id='#{notification.id}'><p><strong>#{notification.actor}</strong> posted a new comment on post <br><strong>#{notification.notifiable.title}</strong></p></a></div><hr style='margin-top:0;'>"
                   
             
           

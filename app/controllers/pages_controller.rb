@@ -3,6 +3,10 @@ class PagesController < ApplicationController
 		
 	end
 
+	def faq
+		
+	end
+
 	def userlist
 		@userlist = User.all.paginate(:page=> params[:page], :per_page=> 10)
 		@post = Post.all

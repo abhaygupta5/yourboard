@@ -21,7 +21,9 @@ class CommentsController < ApplicationController
       	flash[:notice]= "Your comment wasn't posted!"
         redirect_back fallback_location: root_path
       end
-      Notification.create(recipient: Post.find_by_id(@comment.post_id).user, actor: current_user, action: 'posted', notifiable: Post.find_by_id(@comment.post_id))
+      if Post.find_by_id(@comment.post_id).user!=current_user
+        Notification.create(recipient: Post.find_by_id(@comment.post_id).user, actor: current_user, action: 'posted', notifiable: Post.find_by_id(@comment.post_id))
+      end
     end
 
   def destroy

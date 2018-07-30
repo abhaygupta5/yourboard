@@ -67,6 +67,46 @@
 						 
 					</div>
                 </div>
+				
+				<!-- Top users -->
+				<div class="well">
+                    <h4>Top Users</h4>
+                    <div id="TopUsers">
+                    <hr>
+                    	<% point_hash = Hash.new %>
+                    	<% User.all.each do |u| %>
+							<% points = Comment.where(user: u).count*10 + Post.where(user: u).count*100 %>
+							<% point_hash[u.name] = points %>
+                    	<% end %>
+                    	<% points_hash=Hash[point_hash.sort_by{|k, v| v}.reverse[0..4]] %>
+                    	<% points_hash.each do |key,value| %>
+                    		<table ><tr>
+							      <td style="width:40px;">
+							        <% if !User.find_by_id(User.where(name: key)).avatar.blank? %>
+							          <img class="img-responsive" width="40" height="40" src=<%= image_path(User.find_by_id(User.where(name: key)).avatar.url(:thumb)) %> alt="x">
+							        <% else %>
+							          <img class="img-responsive" width="40" height="40" src=<%= image_path('default-missing.jpg') %> alt="default missing" >
+							        <% end %>
+							      </div>
+							    </td>
+							    <td>
+									<div > 
+							   			<p style="margin-left: 10px;font-size: 18px;"><strong><%= key %></strong> has <strong><%= value %></strong> XP</p>
+									</div>
+							    </td>
+							</tr>
+						</table>
+                    		<hr>
+						<% end %>
+                    	
+						
+						 
+					</div>
+                </div>
+
+                <!-- Top users close -->
+
+
                 <% if user_signed_in? %>
 	                <div class="well">
 	                    <div class="card my-4">

@@ -58,6 +58,9 @@
                   Profile
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                  <% xp = Comment.where(user: current_user).count*10 + Post.where(user: current_user).count*100 %>
+                  <div class="dropdown-item"><p align="center" style="background-color: orange;color:black;font-weight: bold;font-size:18px;border-radius: 12px;margin-bottom:0;padding-bottom: 0;"><%= xp %> XP</p></div>
+                  <div class="dropdown-divider"></div>
                   <%= link_to "My Posts", myposts_path, class: "dropdown-item" %>
                   <%= link_to "Make Post", new_post_path, class: "dropdown-item" %>
                   <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
@@ -102,6 +105,9 @@
                 <%= link_to "User List",userlist_path, class: "nav-link my-nav" %>
               </li>
             <% end %>
+            <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
+              <%= link_to "FAQs",faq_path, class: "nav-link my-nav" %>
+            </li>
           </ul>
         </div>
       </div>
