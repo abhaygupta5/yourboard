@@ -34,6 +34,18 @@
               <li class="nav-item" style="padding: 0 5px;font-size: 20px;">
                 <%= link_to "Make Post", new_post_path, class: "nav-link my-nav" %>
               </li>
+              <!-- Notification -->
+              <li class="nav-item dropdown" data-behavior="notifications" style="padding: 0 5px;font-size: 20px;">
+                <a class="nav-link dropdown-toggle my-nav" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bell" data-behavior="unread-count"></i>
+                </a>
+
+                <div class="dropdown-menu" id="notifications" data-behavior="notification-items" style="max-width: auto;max-height: 300px;overflow-y:auto;word-break: break-all;right:0;left:auto;">
+                  
+                  
+                </div>
+              </li>
+              <!-- Notification end -->
               <li class="nav-item">
                 <% if !current_user.avatar.blank? %>
                   <img class="img-responsive" style="border-radius: 25px;margin-left: 10px;" width="40px" height="40px" src=<%= image_path(current_user.avatar.url(:thumb)) %> alt=<%= current_user.avatar_file_name %>>

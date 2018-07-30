@@ -14,24 +14,28 @@ class CommentsController < ApplicationController
         @comment.post_id = Comment.where(commentable_id: @commentable.commentable_id).first.post_id
       end
       if @comment.save
-      	flash[:notice]= 'Your comment was successfully posted!'
+        flash[:notice]= 'Your comment was successfully posted!'
+        Post.find_by_id(@comment.post_id).decrement!(:count)
         redirect_back fallback_location: root_path
       else
       	flash[:notice]= "Your comment wasn't posted!"
         redirect_back fallback_location: root_path
       end
+      Notification.create(recipient: Post.find_by_id(@comment.post_id).user, actor: current_user, action: 'posted', notifiable: Post.find_by_id(@comment.post_id))
     end
 
-    def destroy
+  def destroy
 		@comment=Comment.find(params[:id])
-		@comment.destroy
-		redirect_back fallback_location: root_path
+    Post.find_by_id(@comment.post_id).decrement!(:count)
+    @comment.destroy
+
+    redirect_back fallback_location: root_path
 	end
 
     private
 
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body,:user_id,:post_id)
     end
 
     def find_commentable

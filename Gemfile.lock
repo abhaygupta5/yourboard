@@ -289,7 +289,7 @@ DEPENDENCIES
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   ckeditor
-  coffee-rails (~> 4.2)
+  coffee-rails
   devise (~> 4.4, >= 4.4.3)
   firebase (~> 0.2.8)
   font-awesome-rails

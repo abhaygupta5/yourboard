@@ -1,0 +1,58 @@
+I"Õ(function() {
+  var Notifications,
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Notifications = (function() {
+    function Notifications() {
+      this.handleSuccess = bind(this.handleSuccess, this);
+      this.handleClick = bind(this.handleClick, this);
+      this.getNewNotifications();
+      this.notifications = $("[data-behavior='notifications']");
+      if (this.notifications.length > 0) {
+        this.handleSuccess(this.notifications.data('notifications'));
+      }
+    }
+
+    Notifications.prototype.getNewNotifications = function() {
+      return $.ajax({
+        url: '/notifications.json',
+        dataType: 'JSON',
+        method: 'GET',
+        success: this.handleSuccess
+      });
+    };
+
+    Notifications.prototype.handleClick = function(e) {
+      console.log(e);
+      return $.ajax({
+        url: "/notifications/" + e.currentTarget.id + "/mark_as_read",
+        dataType: "JSON",
+        method: "POST"
+      });
+    };
+
+    Notifications.prototype.handleSuccess = function(data) {
+      var items;
+      $("[data-behavior='notification-link']").on("click", this.handleClick);
+      if (data.length > 0) {
+        items = $.map(data, function(notification) {
+          return "<div style='word-break: break-all;'><a class='dropdown-item' href='" + notification.url + "' data-behavior = 'notification-link' id='" + notification.id + "'><p><strong>" + notification.actor + "</strong><br>posted a new comment on post <br><strong>" + notification.notifiable.title + "</strong></p></a></div><hr>";
+        });
+        $("[data-behavior='unread-count']").text(items.length);
+        return $("[data-behavior='notification-items']").html(items);
+      } else {
+        $("[data-behavior='unread-count']").text(items.length);
+        return $("[data-behavior='notification-items']").html("<p>No New notifications</p>");
+      }
+    };
+
+    return Notifications;
+
+  })();
+
+  jQuery(function() {
+    return new Notifications;
+  });
+
+}).call(this);
+:ET

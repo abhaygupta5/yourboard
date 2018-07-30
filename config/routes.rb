@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :feedbacks
+  resources :notifications, only: [:index] do
+    member do
+      get 'mark_as_read'
+    end
+  end
 
 
   

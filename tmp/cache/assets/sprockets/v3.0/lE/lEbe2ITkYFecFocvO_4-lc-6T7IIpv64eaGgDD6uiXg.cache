@@ -1,0 +1,43 @@
+I"¿(function() {
+  var Notifications,
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Notifications = (function() {
+    function Notifications() {
+      this.handleSuccess = bind(this.handleSuccess, this);
+      this.getNewNotifications();
+      this.notifications = $("[data-behavior='notifications']");
+      if (this.notifications.length > 0) {
+        this.handleSuccess(this.notifications.data('notifications'));
+      }
+    }
+
+    Notifications.prototype.getNewNotifications = function() {
+      return $.ajax({
+        url: '/notifications.json',
+        dataType: 'JSON',
+        method: 'GET',
+        success: this.handleSuccess
+      });
+    };
+
+    Notifications.prototype.handleSuccess = function(data) {
+      var items;
+      items = $.map(data, function(notification) {
+        console.log(data);
+        return "<div style='word-break: break-all;'><a class='dropdown-item' href='/notifications/" + notification.id + "/mark_as_read' %> data-behavior = 'notification-link' id='" + notification.id + "'><p><strong>" + notification.actor + "</strong><br>posted a new comment on post <br><strong>" + notification.notifiable.title + "</strong></p></a></div><hr>";
+      });
+      $("[data-behavior='unread-count']").text(items.length);
+      return $("[data-behavior='notification-items']").html(items);
+    };
+
+    return Notifications;
+
+  })();
+
+  jQuery(function() {
+    return new Notifications;
+  });
+
+}).call(this);
+:ET

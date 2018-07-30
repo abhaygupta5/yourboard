@@ -1,0 +1,30 @@
+
+    <li class="dropdown-item">
+      <a href="<%= notification.notifiable %>" data-behavior = "notification-link" id="<%= notification.id %>">
+        <div class='media'>
+          <div class='media-left media-middle'>
+            <% if !notification.actor.avatar.blank? %>
+              <img src="<%= image_path(notification.actor.avatar.url(:thumb)) %>" class="img-responsive" height="40" width="40" alt="x">
+            <% else %>
+              <img src="<%= image_path('default-missing.jpg') %>" class="img-responsive" height="40" width="40" alt="x">
+            <% end %>
+          </div>
+        
+          <div class='media-body'>
+            <span class='small text-muted'><%= notification.created_at %></span>
+            <p>
+              <strong><%= notification.actor.name %></strong>
+              a new comment
+              <strong><%= notification.notifiable.title %></strong>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+    <hr>
+
+
+
+
+
+

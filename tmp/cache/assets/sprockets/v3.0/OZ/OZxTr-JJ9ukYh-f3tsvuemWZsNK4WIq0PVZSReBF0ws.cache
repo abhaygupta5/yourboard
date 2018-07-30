@@ -1,0 +1,52 @@
+I"¿(function() {
+  var Notifications,
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Notifications = (function() {
+    function Notifications() {
+      this.handleSuccess = bind(this.handleSuccess, this);
+      this.handleClick = bind(this.handleClick, this);
+      this.getNewNotifications();
+      this.notifications = $("[data-behavior='notifications']");
+      if (this.notifications.length > 0) {
+        this.handleSuccess(this.notifications.data('notifications'));
+      }
+    }
+
+    Notifications.prototype.getNewNotifications = function() {
+      return $.ajax({
+        url: '/notifications.json',
+        dataType: 'JSON',
+        method: 'GET',
+        success: this.handleSuccess
+      });
+    };
+
+    Notifications.prototype.handleClick = function(e) {
+      return $.ajax({
+        url: "/notifications/" + e.currentTarget.id + "/mark_as_read",
+        dataType: "JSON",
+        method: "POST"
+      });
+    };
+
+    Notifications.prototype.handleSuccess = function(data) {
+      var items;
+      $("[data-behavior='notification-link']").on("click", this.handleClick);
+      items = map.data(notification)(function() {
+        return notifications.template;
+      });
+      $("[data-behavior='unread-count']").text(items.length);
+      return $("[data-behavior='notification-items']").append(items);
+    };
+
+    return Notifications;
+
+  })();
+
+  jQuery(function() {
+    return new Notifications;
+  });
+
+}).call(this);
+:ET
